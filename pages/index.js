@@ -29,6 +29,7 @@ export async function getStaticProps() {
   const meetupsCollection = db.collection("meetups");
   const meetups = await meetupsCollection.find().toArray();
   client.close();
+  console.log(meetups);
   return {
     props: {
       meetups: meetups.map((meetup) => ({
@@ -39,7 +40,7 @@ export async function getStaticProps() {
         id: meetup._id.toString(),
       })),
     },
-    revalidate: 10,
+    revalidate: 1,
   }; //re-regenrated every 10s
 }
 
